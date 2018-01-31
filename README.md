@@ -1,2 +1,2 @@
 # nunux
-Tips, Tricks &amp; cheatsheets to do things &amp; stuff with your linux
+Tips &amp; Tricks &amp; cheatsheets to do things &amp; stuff with your nunux
