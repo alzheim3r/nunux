@@ -25,8 +25,8 @@ They'll work like a pipe between the global and the torrent namespace:
 - **veth1** will be on the torrent namespace side.
 
 ```sh
-	ip link add veth0 type veth peer name veth1
-	ip link set veth1 netns torrent
+ip link add veth0 type veth peer name veth1
+ip link set veth1 netns torrent
 ```
 
 ### Control:
