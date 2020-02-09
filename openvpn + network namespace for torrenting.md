@@ -103,7 +103,9 @@ Launch programs in the new netspace using the examples below:
 
 
 ### Double check the bittorrent's client IP
-Follow [This magnet link](magnet:?xt=urn:btih:2fa71a2dbb7d53a39373a9c4e2c9d89aaa7a6db1&dn=checkMyTorrentIp.png&tr=http%3A%2F%2Fcheckmytorrentip.net%2Ftorrentip%2Fannounce.php "This magnet link"). 
+Follow This magnet link
+
+	magnet:?xt=urn:btih:2fa71a2dbb7d53a39373a9c4e2c9d89aaa7a6db1&dn=checkMyTorrentIp.png&tr=http%3A%2F%2Fcheckmytorrentip.net%2Ftorrentip%2Fannounce.php "This magnet link"
 
 The tracker should show an error showing the client IP address.
 
