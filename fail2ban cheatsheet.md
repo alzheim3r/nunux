@@ -1,5 +1,8 @@
-fail2ban
-========
+fail2ban Cheatsheet
+===================
+
+Fail2ban installation isn't covered here. Simply use your distro's package manager.
+
 
 unban ip
 --------
@@ -64,15 +67,8 @@ dir: /etc/fail2ban/jail.d/
 	[php-404]
 	enabled   = true
 	filter    = custom_php-404
-	logpath = /var/log/nginx/pantoufle.ml.access.log
-	          /var/log/nginx/5.39.90.190.access.log
-	          /var/log/nginx/digitalsook.net.access.log
-	          /var/log/nginx/ns3277635.ip-5-39-90.eu.access.log
-	          /var/log/nginx/porn.pantoufle.ml.access.log
-	          /var/log/nginx/sonic.access.log
-	          /var/log/nginx/isso.access.log
-	          /var/log/nginx/seahub.access.log
-	          /var/log/nginx/ru.access.log
+	logpath = /var/log/nginx/site1.tld.ml.access.log
+	          /var/log/nginx/site2.tld.access.log
 	maxretry  = 1
 	findtime  = 1800
 	bantime   = 3600
