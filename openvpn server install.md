@@ -116,6 +116,9 @@ systemctl start openvpn-server@server
 ## Client .ovpn config files
 
 ### create template config file
+
+This configuration will change the client's default gateway, so all client's internet traffic will go through the VPN. If this isn't what you want, comment out ``redirect-gateway def1``.
+
 ```sh
 cd /etc/openvpn/client
 nano template.conf
@@ -141,7 +144,6 @@ verb 3
 route 10.0.0.0 255.255.255.0
 #route-nopull
 redirect-gateway def1
-
 ```
 
 ### generate ovpn file
@@ -179,6 +181,9 @@ rm -rf client1
 
 ## Give a client a static IP
 
+Giving your client a specific IP may help a lot, especially if you plan to use up/down scripts in the future. 
+
+
 ### enable client specific config
 ```sh
 nano /etc/openvpn/server/server.conf
@@ -200,12 +205,16 @@ set client's static IP
 nano /etc/openvpn/client-config-dir/client1
 ```
 ```
-ifconfig-push 10.5.0.2 255.255.255.192
+ifconfig-push 10.5.0.2 255.255.255.0
 ```
 Config filename must match the client certificate's CN
 
 
 ## Custom iptables rules per client
+
+In some situations, a client  might want to expose a local port to the VPN server. This is especially useful when a client is connected to the internet using a mobile 4G access and want to expose a service to the internet.
+
+In the example below, client's ports 10000 to 10009 will be forwarded and local services using these ports will be reachable from the internet using the VPN server IP.
 
 Because we use iptables, openvpn can no longer be started with no privileges. As a result, these lines must be commented out from the config file as follows..
 ```sh
@@ -216,7 +225,7 @@ nano /etc/openvpn/server/server.conf
 ;group nobody
 ```
 
-And those lines musst be added at the end of the same config file..
+And those lines must be added at the end of the same config file..
 ```
 script-security 2
 client-connect    /etc/openvpn/scripts/up-client.sh
@@ -225,8 +234,8 @@ client-disconnect /etc/openvpn/scripts/down-client.sh
 
 ### create scripts
 ```sh
-mkdir /etc/openvpn/server/scripts
-chmod o+rx /etc/openvpn/server/scripts
+mkdir /etc/openvpn/scripts
+chmod o+rx /etc/openvpn/scripts
 touch /etc/openvpn/scripts/up-client.sh  /etc/openvpn/scripts/down-client.sh
 chmod o+rx /etc/openvpn/scripts/*
 ```
@@ -243,7 +252,7 @@ echo " >> CONNECTION FROM $common_name - LOCAL IP: $ifconfig_pool_remote_ip"
 
 case "$common_name" in
    (client1)
-        echo " >> FORWARDING PORTS 10000 TO 10009"
+        echo " >> FORWARDING PORTS 10000 TO 10009" # shows up in the journal
         iptables -t nat -A PREROUTING -p tcp -m tcp --dport 10000:10009 -j DNAT --to-destination $ifconfig_pool_remote_ip
         ;;
    (*)
@@ -265,11 +274,9 @@ echo " >> DISCONNECTION FROM $common_name - LOCAL IP: $ifconfig_pool_remote_ip"
 
 case "$common_name" in
    (client1)
-        echo " >> REMOVING NAT RULE"
         iptables -t nat -D PREROUTING -p tcp -m tcp --dport 10000:10009 -j DNAT --to-destination $ifconfig_pool_remote_ip
         ;;
    (*)
-        echo " >> No script for $common_name"
         ;;
 esac
 ```
@@ -277,6 +284,7 @@ esac
 
 ## Bash scripts
 
+Scripts to create/revoke clients and generate their config files.
 
 ### /etc/openvpn/client/generate_client_ovpn.sh
 ```sh
@@ -403,9 +411,10 @@ else
 fi
 ```
 
-## No internet? Don't forget NAT
+## No internet when connected to the VPN? 
 
-on the VPN server
+If you chose to let your internet traffic go through the VPN, Don't forget to enable NAT on the VPN server:
+
 ```sh
 sysctl -w net.ipv4.ip_forward=1
 iptables -P FORWARD ACCEPT
