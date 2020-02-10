@@ -13,3 +13,8 @@ extract:
     7z x archive.7z
     7z x -so archive.tar.7z | tar xvf -
 
+## xz
+
+multithread + maximum compression
+
+    export XZ_OPT="--threads=4 -e9" tar -cJf archive.tar.xz /folder/
