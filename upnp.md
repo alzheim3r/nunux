@@ -1,7 +1,7 @@
 Upnp port forwarding request
 =============================
 
-Only works if Upnp is enabled on the router.
+No need to access the router's webUI setup port forwarding to your linux PC! However the router needs to have Upnp enabled for this to work.
 
 # Nat port 12001
 

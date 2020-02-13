@@ -1,22 +1,21 @@
 fail2ban Cheatsheet
 ===================
 
-Fail2ban installation isn't covered here. Simply use your distro's package manager.
+Fail2ban installation isn't covered here. Simply ```pacman -S fail2ban```
 
 
 unban ip
 --------
 
 	iptables -S 
-	# look for f2b-sshd
+	# ie. Look for f2b-sshd for sshd jail
 	fail2ban-client set sshd unbanip 37.165.28.214
-	fail2ban-client set php-404 unbanip 37.165.28.214
 
 
 whitelist ip
 ------------
 
-	nano /etc/fail2ban/jail.local
+	nano /etc/fail2ban/jail.conf
 	
 	[DEFAULT]
 	ignoreip  = 127.0.0.1/8 10.0.0.0/8 37.165.230.232/32
@@ -63,7 +62,7 @@ For multiple logfiles:
 dir: /etc/fail2ban/jail.d/  
 
 	nano php-404.local
-
+	...
 	[php-404]
 	enabled   = true
 	filter    = custom_php-404

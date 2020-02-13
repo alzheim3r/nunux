@@ -1,5 +1,7 @@
 # File transfer using netcat
 
+When you're out of options, and if nothing else helps, maybe you can use .. nc!
+
 ### On the listening (receiving) part
 
 ```

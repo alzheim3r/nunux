@@ -1,6 +1,8 @@
 Email forwarding with postfix
 =============================
 
+Tested on Ubuntu 16.04.
+
 Setup MX Record
 ---------------------
 Goto  the domain.tld DNS records

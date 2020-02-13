@@ -1,6 +1,8 @@
 ruTorrent multi-user and Nginx
 ==============================
 
+In this doc we assume you want to intall a full muti-user rutorrent LXC container using Arch Linux. Installing LXC and making a LXC container isn't covered here.
+
 Install php-fpm
 ---------------
 

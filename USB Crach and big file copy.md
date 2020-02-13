@@ -1,7 +1,12 @@
 Crach/Dismount/Freeze when copying big file to an external USB disc
 ===================================================================
 
+Observed on a raspberry pi 4B and jmicron usb-sata bridge.
+
 This is a UAS driver problem. UAS must be disabled in usb-storage module.
+
+Got your ID? 
+------------
 
 - module option syntax: ```quirks=Vendor_ID:Product_ID:u```
 - Get Vendor_ID & Product_ID: ```lsusb -v```

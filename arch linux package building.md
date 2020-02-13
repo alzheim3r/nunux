@@ -1,6 +1,8 @@
 Arch linux Build Package
 =======================
 
+Yes, I know, yaourt has been deprecated.. Well just replace yaourt by yay and that should work too ;)
+
 Get it 
 ------
 

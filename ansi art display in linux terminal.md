@@ -1,6 +1,8 @@
 ansi art display in linux terminal
 ==================================
 
+Yes! It is posssible to display good old 90s ANSI art artwork in your shinny modern linux terminal..
+
 The easy option: convert old DOS codepage 437 to UTF-8
 ------------------------------------------------------
 
